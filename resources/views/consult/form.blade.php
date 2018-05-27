@@ -1,6 +1,6 @@
 @extends('layouts.app') 
 @section('content')
-<div class="container">
+<div class="container-fluid">
     <h1>
         Contact us for our consultancy services
     </h1>

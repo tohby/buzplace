@@ -21,3 +21,5 @@ Route::resource('/profile', 'ProfilesController');
 Route::get('profile/{id}', 'ProfilesController@show');
 Route::get('/search/{searchKey}', 'PostsController@search');
 Route::resource('/consult', 'ConsultController');
+Route::get('/directory', 'PostsController@directory');
+Route::resource('/directories', 'DirectoriesController');

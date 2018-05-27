@@ -117,10 +117,11 @@
                         @else
                         <li><a class="nav-link" href="/">Home</a></li>
                         <li><a class="nav-link" href="/forums">Forums</a></li>
-                        <li><a class="nav-link" href="/consult/create">Consultations</a></li>
+                        <li><a href="/directory" class="nav-link">Directories</a></li>
+                        <li><a class="nav-link" href="/consult/create">Consultation</a></li>
                         {{-- <li><a class="nav-link" href="/messages">Messages @include('messenger.unread-count')</a></li> --}}
                         <div class="dropdown">
-                                <button type="button" style="border-radius: 100%;" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown">
+                                <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown">
                                         <strong>{{ substr(Auth::user()->name, 0,1) }} <span class="caret"></span></strong>
                                 </button>
                                 <div class="dropdown-menu">

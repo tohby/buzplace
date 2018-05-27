@@ -10,11 +10,12 @@
 
     <title>{{ config('app.name', 'Buzplace') }}</title>
     <link rel="icon" type="image/png" href="/images/logo.png" />
-
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg"
         crossorigin="anonymous">
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/styles.css') }}" rel="stylesheet">
     <link href="{{ asset('css/admin.css') }}" rel="stylesheet">
 </head>
 <body>
@@ -56,8 +57,8 @@
                         <li><a class="nav-link" href="/consult/create">Consultations</a></li>
                         {{-- <li><a class="nav-link" href="/messages">Messages @include('messenger.unread-count')</a></li> --}}
                         <div class="dropdown">
-                                <button type="button" style="border-radius: 100%;" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown">
-                                        <strong>{{ substr(Auth::user()->name, 0,1) }} <span class="caret"></span></strong>
+                                <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown">
+                                        <strong>{{Auth::user()->name}} <span class="caret"></span></strong>
                                 </button>
                                 <div class="dropdown-menu">
                                   <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
@@ -77,13 +78,16 @@
                 <div class="sidenav">
                         <a href="#about"><i class="far fa-chart-bar"></i> Dashboard</a>
                         <a href="#services"><i class="far fa-newspaper"></i> News</a>
-                        <a href="#clients"><i class="far fa-address-card"></i> Directories</a>
+                        <a href="/directories"><i class="far fa-address-card"></i> Directories</a>
                         <a href="/consult"><i class="far fa-envelope"></i> Consultation</a>
                         <a href="#contact"><i class="fas fa-child"></i></i> Users</a>
                 </div>
-            <div class="container">
+            <div class="main">
+                <div class="container-fluid">
+                            @include('inc.alerts')
+                </div>
+                @yield('content')
             </div>
-            @yield('content')
         </main>
     </div>
     <script src="{{ asset('js/app.js') }}"></script>

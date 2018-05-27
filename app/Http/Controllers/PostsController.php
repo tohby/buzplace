@@ -7,6 +7,7 @@ use App\Post;
 use App\User;
 use App\Tag;
 use App\PostsPhoto;
+use App\Directory;
 use App\Http\Requests\UploadRequest;
 
 class PostsController extends Controller
@@ -171,5 +172,10 @@ class PostsController extends Controller
         $user_id = auth()->user()->id;
         $user = User::find($user_id);
         return view('posts.myposts')->with('posts', $user->posts);
+    }
+
+    public function directory(){
+        $directories = Directory::orderBy('created_at', 'body')->paginate(4);
+        return view ('posts.directories')->with('directories', $directories);
     }
 }
