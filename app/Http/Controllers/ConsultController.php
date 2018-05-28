@@ -13,13 +13,22 @@ class ConsultController extends Controller
     }
     //display consultation messages
     public function index(){
-        $consults = Consult::orderBy('created_at', 'body')->paginate(11);
-        return view ('admin.consultations')->with('consults', $consults);    
+        if(auth()->user()->isAdmin != 1){
+            return redirect('/posts')->with('error', 'Access denied! Unauthorized Page');
+        }else{
+            $consults = Consult::orderBy('created_at', 'body')->paginate(11);
+            return view ('admin.consultations')->with('consults', $consults);    
+        }
+        
     }
 
     //display form page
     public function create(){
-        return view('consult.form');
+        if(auth()->user()->isAdmin != 1){
+            return redirect('/posts')->with('error', 'Access denied! Unauthorized Page');
+        }else{
+             return view('consult.form');
+        }
     }
 
     //handle form request

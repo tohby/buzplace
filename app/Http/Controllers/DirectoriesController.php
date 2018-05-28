@@ -7,14 +7,26 @@ use Illuminate\Http\Request;
 
 class DirectoriesController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     //
     public function index(){
-        $directories = Directory::orderBy('created_at', 'name')->paginate(10);
-        return view('directory.index')->with('directories', $directories);
+        if(auth()->user()->isAdmin != 1){
+            return redirect('/posts')->with('error', 'Access denied! Unauthorized Page');
+        }else{
+            $directories = Directory::orderBy('created_at', 'body')->paginate(4);
+            return view ('directory.index')->with('directories', $directories);
+        }
     }
 
     public function create(){
-        return view('directory.create');
+        if(auth()->user()->isAdmin != 1){
+            return redirect('/posts')->with('error', 'Access denied! Unauthorized Page');
+        }else{
+            return view('directory.create');
+        }
     }
 
     public function store(Request $request){
@@ -31,10 +43,11 @@ class DirectoriesController extends Controller
     }
 
     public function edit($id){
-        $directory = Directory::find($id);
-        return view('directory.edit')->with('directory', $directory);
-        if(auth()->user()->isAdmin !== 1){
-            return redirect('/posts')->with('error', 'Unauthorized Page');
+        if(auth()->user()->isAdmin != 1){
+            return redirect('/posts')->with('error', 'Access denied! Unauthorized Page');
+        }else{
+            $directory = Directory::find($id);
+            return view('directory.edit')->with('directory', $directory);
         }
     }
 
@@ -48,8 +61,12 @@ class DirectoriesController extends Controller
     }
 
     public function destroy($id){
-        $directory = Directory::find($id);
+        if(auth()->user()->isAdmin != 1){
+            return redirect('/posts')->with('error', 'Access denied! Unauthorized Page');
+        }else{
+            $directory = Directory::find($id);
         $directory->delete();
         return redirect('/directories')->with('success', 'Directory Deleted');
+        }
     }
 }

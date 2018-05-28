@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Post;
 use App\User;
 use App\Tag;
+use App\News;
 use App\PostsPhoto;
 use App\Directory;
 use App\Http\Requests\UploadRequest;
@@ -177,5 +178,10 @@ class PostsController extends Controller
     public function directory(){
         $directories = Directory::orderBy('created_at', 'body')->paginate(4);
         return view ('posts.directories')->with('directories', $directories);
+    }
+
+    public function newsArticles(){
+        $news = News::orderBy('created_at', 'body')->paginate(4);
+        return view ('posts.news')->with('news', $news);
     }
 }

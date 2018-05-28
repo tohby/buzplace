@@ -23,3 +23,5 @@ Route::get('/search/{searchKey}', 'PostsController@search');
 Route::resource('/consult', 'ConsultController');
 Route::get('/directory', 'PostsController@directory');
 Route::resource('/directories', 'DirectoriesController');
+Route::resource('/news', 'NewsController');
+Route::get('/newsArticles', 'PostsController@newsArticles');

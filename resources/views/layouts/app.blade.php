@@ -116,6 +116,7 @@
                         <li><a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a></li>
                         @else
                         <li><a class="nav-link" href="/">Home</a></li>
+                        <li><a href="/newsArticles" class="nav-link">News</a></li>
                         <li><a class="nav-link" href="/forums">Forums</a></li>
                         <li><a href="/directory" class="nav-link">Directories</a></li>
                         <li><a class="nav-link" href="/consult/create">Consultation</a></li>

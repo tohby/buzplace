@@ -7,11 +7,16 @@ use App\Http\Controllers\Controller;
 
 class AdminController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     //
     public function index(){
-        return view('admin.index');
-        if(auth()->user()->isAdmin !== 1){
-            return redirect('/posts')->with('error', 'Unauthorized Page');
+        if(auth()->user()->isAdmin != '1'){
+            return redirect('/posts')->with('error', 'Access denied! Unauthorized Page');
+        }else{
+            return view('admin.index');
         }
     }
 }
